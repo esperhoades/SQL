@@ -1,0 +1,161 @@
+**Schema (MySQL v5.7)**
+
+    CREATE TABLE superstore (
+        item_id INTEGER PRIMARY KEY,
+        item_name TEXT,
+        category TEXT,
+        price DECIMAL(10, 2),
+        stock_quantity INTEGER,
+        average_rating DECIMAL(3, 2)
+    );
+    
+    INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+    VALUES
+        (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+        (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+        (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+        (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+        (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+        (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+        (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+        (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+        (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+        (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+        (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+        (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+        (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+        (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+        (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+    
+
+---
+
+**Query #1**
+
+    SELECT item_name, price
+    FROM superstore
+    ORDER BY price desc
+    ;
+
+| item_name                    | price  |
+| ---------------------------- | ------ |
+| Smart LED TV                 | 549.00 |
+| Memory Foam Mattress         | 499.99 |
+| Robot Vacuum Cleaner         | 199.50 |
+| Ergonomic Office Chair       | 189.00 |
+| Air Purifier                 | 129.50 |
+| Stainless Steel Cookware Set | 89.99  |
+| Cotton Bedding Set           | 89.00  |
+| Premium Coffee Maker         | 79.99  |
+| Smart Home Security Camera   | 79.95  |
+| Wireless Earbuds             | 49.99  |
+| Slow Cooker                  | 49.95  |
+| Wireless Bluetooth Speaker   | 39.99  |
+| Cutlery Set                  | 34.50  |
+| Non-Stick Baking Set         | 29.95  |
+| Cozy Throw Blanket           | 24.99  |
+
+---
+**Query #2**
+
+    SELECT AVG (price), item_name
+    FROM superstore
+    GROUP BY item_name
+    ;
+
+| AVG (price) | item_name                    |
+| ----------- | ---------------------------- |
+| 129.500000  | Air Purifier                 |
+| 89.000000   | Cotton Bedding Set           |
+| 24.990000   | Cozy Throw Blanket           |
+| 34.500000   | Cutlery Set                  |
+| 189.000000  | Ergonomic Office Chair       |
+| 499.990000  | Memory Foam Mattress         |
+| 29.950000   | Non-Stick Baking Set         |
+| 79.990000   | Premium Coffee Maker         |
+| 199.500000  | Robot Vacuum Cleaner         |
+| 49.950000   | Slow Cooker                  |
+| 79.950000   | Smart Home Security Camera   |
+| 549.000000  | Smart LED TV                 |
+| 89.990000   | Stainless Steel Cookware Set |
+| 39.990000   | Wireless Bluetooth Speaker   |
+| 49.990000   | Wireless Earbuds             |
+
+---
+**Query #3**
+
+    SELECT MAX (price), item_name
+    FROM superstore
+    GROUP BY item_name
+    ;
+
+| MAX (price) | item_name                    |
+| ----------- | ---------------------------- |
+| 129.50      | Air Purifier                 |
+| 89.00       | Cotton Bedding Set           |
+| 24.99       | Cozy Throw Blanket           |
+| 34.50       | Cutlery Set                  |
+| 189.00      | Ergonomic Office Chair       |
+| 499.99      | Memory Foam Mattress         |
+| 29.95       | Non-Stick Baking Set         |
+| 79.99       | Premium Coffee Maker         |
+| 199.50      | Robot Vacuum Cleaner         |
+| 49.95       | Slow Cooker                  |
+| 79.95       | Smart Home Security Camera   |
+| 549.00      | Smart LED TV                 |
+| 89.99       | Stainless Steel Cookware Set |
+| 39.99       | Wireless Bluetooth Speaker   |
+| 49.99       | Wireless Earbuds             |
+
+---
+**Query #4**
+
+    SELECT SUM (price), 'Kitchen Supplies'
+    FROM superstore
+    ;
+
+| SUM (price) | Kitchen Supplies |
+| ----------- | ---------------- |
+| 2135.29     | Kitchen Supplies |
+
+---
+**Query #5**
+
+    SELECT COUNT (item_name) 'Kitchen Supplies'
+    FROM superstore
+    ;
+
+| Kitchen Supplies |
+| ---------------- |
+| 15               |
+
+---
+**Query #6**
+
+    SELECT item_name, 'Electronics', average_rating
+    FROM superstore
+    WHERE average_rating>3.5
+    ORDER BY average_rating desc
+    ;
+
+| item_name                    | average_rating | Electronics |
+| ---------------------------- | -------------- | ----------- |
+| Premium Coffee Maker         | 4.90           | Electronics |
+| Memory Foam Mattress         | 4.80           | Electronics |
+| Cotton Bedding Set           | 4.70           | Electronics |
+| Slow Cooker                  | 4.70           | Electronics |
+| Stainless Steel Cookware Set | 4.60           | Electronics |
+| Air Purifier                 | 4.60           | Electronics |
+| Smart LED TV                 | 4.50           | Electronics |
+| Ergonomic Office Chair       | 4.50           | Electronics |
+| Non-Stick Baking Set         | 4.40           | Electronics |
+| Cutlery Set                  | 4.40           | Electronics |
+| Robot Vacuum Cleaner         | 4.30           | Electronics |
+| Wireless Earbuds             | 4.30           | Electronics |
+| Wireless Bluetooth Speaker   | 4.20           | Electronics |
+| Cozy Throw Blanket           | 4.20           | Electronics |
+| Smart Home Security Camera   | 4.10           | Electronics |
+
+---
+
+[View on DB Fiddle](https://www.db-fiddle.com/f/PvBAaQwEUSWAxZCsg4Vmx/0)
