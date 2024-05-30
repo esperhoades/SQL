@@ -30,7 +30,7 @@
 
 ---
 
-**Query #1**
+The items and their price
 
     SELECT item_name, price
     FROM superstore
@@ -56,7 +56,7 @@
 | Cozy Throw Blanket           | 24.99  |
 
 ---
-**Query #2**
+The average price of each  item
 
     SELECT AVG (price), item_name
     FROM superstore
@@ -82,7 +82,7 @@
 | 49.990000   | Wireless Earbuds             |
 
 ---
-**Query #3**
+The highest price items
 
     SELECT MAX (price), item_name
     FROM superstore
@@ -108,7 +108,7 @@
 | 49.99       | Wireless Earbuds             |
 
 ---
-**Query #4**
+What is the price if all Kitchen Supplies
 
     SELECT SUM (price), 'Kitchen Supplies'
     FROM superstore
@@ -119,7 +119,7 @@
 | 2135.29     | Kitchen Supplies |
 
 ---
-**Query #5**
+The amount of Kitchen Supplies
 
     SELECT COUNT (item_name) 'Kitchen Supplies'
     FROM superstore
@@ -130,7 +130,7 @@
 | 15               |
 
 ---
-**Query #6**
+The highest rated electronics
 
     SELECT item_name, 'Electronics', average_rating
     FROM superstore
